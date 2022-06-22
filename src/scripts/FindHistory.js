@@ -1,67 +1,69 @@
-import fetch from "node-fetch";
+var webURL = "https://en.wikipedia.org/w/rest.php/v1/search/page";
+var webSearchURL = "https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/ImageSearchAPI";
+var searchKey = "february 2017";
+var searchLimit = 1;
 
-export class WikiAccessAPI{
-    constructor(url){
-        this.url = url;
-        process.setMaxListeners(0);
-    }
-    parseHTML(string){
-        // remove html tags from word 
-        var string = string.replace(/<\/?[^>]+>/gi,'');
-        // find the word that encapsulates the text 
-        let scrapeWord = "&quot;"
-        // index the first instance of the word 
-        let first = string.search(scrapeWord);
-        // strip text from first index till the end 
-        string = string.slice(first+scrapeWord.length);
-        // index second instance of the word 
-        let second = string.search(scrapeWord);
-        // string text between second index and start
-        string = string.slice(second-second,second);
-        // return the substring descriptions
-        return string;
-    }
-    async getHistory(searchKey,searchLimit){
-        // user paramters 
-        var request = `?q=${searchKey}&limit=${searchLimit}`;
-        // response of API fetch
-        var response = fetch(this.url+request);
-        // 
-        // itterate over the amount of results and retrieve the necessary information
-        for (let i=0; i < searchLimit;i++){
-            // clone the response into json object for multiple use of body in promise object 
-            response.then(value => {
-                return value.clone().json();
-            })
-            // check if all forms of description in the json object are not null
-            .then(data => {
-                if((data['pages'][i]['description'] && data['pages'][i]['title']) && data['pages'][i]['excerpt'] != null) {
-                   // retrieve all forms of descriptions for the event 
-                   var eventTitle = data['pages'][i]['title'];
-                   var eventDesc = data['pages'][i]['description'];
-                   var eventExcerpt = this.parseHTML(data['pages'][i]['excerpt']);
-                   // decide between title and description and use excerpt as final resort
-                   // look for the lengthier description with a limit of 30 characters
-                   if (eventTitle.length > eventDesc.length && eventTitle.length > 30){
-                    console.log(eventTitle)
-                    //return eventTitle;
-                   }
-                   else if (eventDesc.length > eventTitle.length && eventDesc.length > 30){
-                    console.log(eventDesc)
-                    //return eventDesc;
-                   }
-                   else{
-                    console.log(eventExcerpt)
-                    //return eventExcerpt;
-                   }
-                }
-            })
+getHistory(webURL,searchKey, searchLimit);
+
+async function getImage(imageDesc,pageNum,pageSize,autoCorrect){
+    var imageURL = '';
+    const parameters = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': '78b7fde4fbmsh2b197a3d212b757p133e06jsn4072492ead4d',
+            'X-RapidAPI-Host': 'contextualwebsearch-websearch-v1.p.rapidapi.com'
         }
+    };
+    var request = `?q=${imageDesc}&pageNumber=${pageNum}&pageSize=${pageSize}&autoCorrect=${autoCorrect}`;
+    var response = fetch(webSearchURL+request,parameters);
+    await response.then(value => value.json()).then(data => imageURL = data["value"][0]["thumbnail"]);
+    return imageURL;
+}
+
+async function getHistory(url,searchKey,searchLimit){
+    var request = `?q=${searchKey}&limit=${searchLimit}`;
+    var response = fetch(url+request);
+    for (let i=0; i < searchLimit;i++){
+        response.then(value => {
+            return value.clone().json();
+        })
+        .then(data => {
+            var dataResponse = data['pages'][i];
+            if((dataResponse['description'] && dataResponse['title']) && dataResponse['excerpt'] != null) {
+               var eventTitle = dataResponse['title'];
+               var eventDesc = dataResponse['description'];
+               var eventExcerpt = parseHTML(dataResponse['excerpt']);
+               if (eventTitle.length > eventDesc.length && eventTitle.length > 30){
+                getImage(eventDesc,1,1,true).then(data => {
+                    document.getElementById("eventImage").src = data;
+                    document.body.append(eventDesc);
+                })
+                } 
+               else if (eventDesc.length > eventTitle.length && eventDesc.length > 30){
+                getImage(eventDesc,1,1,true).then(data => {
+                    document.getElementById("eventImage").src = data;
+                    document.body.append(eventDesc);
+                })
+               }
+               else{
+                getImage(eventExcerpt,1,1,true).then(data => {
+                    document.getElementById("eventImage").src = data;
+                    document.body.append(eventExcerpt);
+                })
+               }             
+            }
+        })    
     }
 }
 
-/*
-var wiki = new WikiAccessAPI("https://en.wikipedia.org/w/rest.php/v1/search/page");
-wiki.getHistory('april 2019',2);
-*/
+function parseHTML(string){
+    var string = string.replace(/<\/?[^>]+>/gi,'');
+    let scrapeWord = "&quot;"
+    let first = string.search(scrapeWord);
+    string = string.slice(first+scrapeWord.length);
+    let second = string.search(scrapeWord);
+    string = string.slice(second-second,second);
+    return string;
+}
+
 
