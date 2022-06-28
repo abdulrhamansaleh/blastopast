@@ -4,10 +4,8 @@ import axios from 'axios';
 
 export default function () {
   const [events, setEvents] = useState([]);
-
   var searchKey = 'may 2021';
-  var searchLimit = 8;
-
+  var searchLimit = 20;
   useEffect(() => {
     var webURL = "https://en.wikipedia.org/w/rest.php/v1/search/page";
     var request = `?q=${searchKey}&limit=${searchLimit}`;
@@ -22,7 +20,6 @@ export default function () {
   return (
     <> 
     <div key ={events.id}>
-    <EventImage description = {events.title}/>
       <h1>{events.title}</h1>
       <h2>{events.description}</h2>
     </div>
