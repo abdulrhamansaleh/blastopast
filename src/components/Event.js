@@ -17,11 +17,19 @@ export default function () {
       }
     )
   })
+
+  const headerStyle = {
+    color: 'black',
+    border:'2px solid blue',
+    margin: '10px',
+    textAlign: 'center',
+  }
+
   return (
     <> 
     <div key ={events.id}>
-      <h1>{events.title}</h1>
-      <h2>{events.description}</h2>
+      <h1 style = {headerStyle}>{events.title}</h1>
+      <h2 style = {headerStyle}>{events.description}</h2>
     </div>
     </>
   )
