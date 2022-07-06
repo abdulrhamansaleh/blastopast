@@ -4,14 +4,13 @@ import './styles/index.css';
 import EventDescription from './components/Event';
 import reportWebVitals from './reportWebVitals';
 import Header from './components/Header';
-import SearchImage from './components/SearchImage';
-import InputForm from './components/InputForm';
+import SelectionSegment from './components/SelectionSegment';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Header/> 
-    <div><SearchImage/></div>
+    <div><SelectionSegment/></div>
   </React.StrictMode>
 );
 reportWebVitals();

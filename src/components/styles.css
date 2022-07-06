@@ -1,0 +1,94 @@
+/* CSS */
+.btn-go {
+  margin-top:auto;
+  background-color: transparent;
+  border: 2px solid #1A1A1A;
+  border-radius: 15px;
+  box-sizing: border-box;
+  color: #3B3B3B;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-size: 16px;
+  font-weight: 600;
+  line-height: normal;
+  min-height: 60px;
+  outline: none;
+  padding: 16px 24px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 50%;
+  will-change: transform;
+}
+
+.btn-go:disabled {
+  pointer-events: none;
+}
+
+.btn-go:hover {
+  color: #fff;
+  background-color: #1A1A1A;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
+}
+
+.btn-go:active {
+  box-shadow: none;
+  transform: translateY(0);
+}
+
+.columnPara{
+    color:white;
+    margin-top:5%;
+    border:1px solid red;
+    padding-inline: 10%;
+}
+.columnHeader{
+    text-align:center;
+    color: white;
+    font-weight:bold;
+    font-family:Arial;
+    font-size:1.2em;
+    padding-block: 5%;
+}
+.searchBar{
+    min-height:3em;
+    max-width:70%;
+    font-size:1.7rem;
+    font-weight: 'bold';
+    margin-inline: 20%;
+    margin-block:2.5%;
+    color: #FF8552;
+    border-radius: 1.5em;
+    background-image:linear-gradient(white,white);
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+}
+.searchText{
+    padding-left:5%;
+    padding-block:3%;
+    font-size: 1em;
+    font-weight: bold;
+
+}
+.row{
+    margin-top:5%;
+    display:flex;
+}
+.column{
+    border-left:8px solid #616163;
+    border-bottom:8px solid #616163;
+    border-radius:8%;
+    flex: 80%;
+    min-height:50vh;
+    margin-inline:5%;
+    background:#586A6A;
+    box-shadow:0 15px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+}
+.column-2{
+    border-right: 8px solid #616163;
+    border-left: 0 !important;
+}

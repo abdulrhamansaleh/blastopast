@@ -31,9 +31,6 @@ export default function Header() {
   }
   return (
     <div style = {navBar}>
-      <div style = {icon}>
-        <FaRocket size={20}/>
-      </div>
       <a style = {title}> 
         BlastToPast
       </a>
