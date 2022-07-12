@@ -2,9 +2,9 @@ import React, { useState,useEffect } from 'react';
 import EventImage from './EventImage';
 import axios from 'axios';
 
-export default function () {
+export default function Event(props) {
   const [events, setEvents] = useState([]);
-  var searchKey = 'may 2021';
+  var searchKey = `${props.month} 2021`;
   var searchLimit = 20;
   useEffect(() => {
     var webURL = "https://en.wikipedia.org/w/rest.php/v1/search/page";
@@ -16,18 +16,17 @@ export default function () {
       setEvents(filteredArray[0]);
       }
     )
-  })
-
+  },[])
   const headerStyle = {
     color: 'black',
     border:'2px solid blue',
     margin: '10px',
     textAlign: 'center',
   }
-
   return (
     <> 
     <div key ={events.id}>
+      <EventImage description={events.title}/>
       <h1 style = {headerStyle}>{events.title}</h1>
       <h2 style = {headerStyle}>{events.description}</h2>
     </div>

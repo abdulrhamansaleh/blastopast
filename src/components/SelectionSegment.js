@@ -1,10 +1,13 @@
 import React from 'react'
 import Typed from 'react-typed';
 import  "./styles.css";
+import {Link} from 'react-router-dom';
 import {FcSearch} from 'react-icons/fc';
+
 
 export default function SelectionSegment() {
   var currentMonth = new Date().getMonth();
+  var month = getMonth(currentMonth);
   return ( 
     <>
     <div className="searchBar">
@@ -21,17 +24,21 @@ export default function SelectionSegment() {
     <div className="row">
       <div className="column">
         <h1 className="columnHeader"> 
-          Explore The Past 20 Years of {getMonth(currentMonth)}
+          Explore The Past 20 Years of {month}
         </h1>
         <p className="columnPara">
-          Learn more about the past 20 years of this month, ranked from a categories of politics, sports, natural disasters and more
+          Learn more about the politics, sports and other significant events that occured in {month}.
         </p>
-        <button className="btn-go">Explore</button>
+        <Link to="explore-current"><button className="btn-go">Explore</button> </Link>
       </div>
       <div className="column column-2">
         <p className="columnHeader"> 
           Select another Month 
         </p>
+        <p className="columnPara">
+          Choose a Month and explore similar categories of events
+        </p>
+        <Link to="explore-custom"><button className="btn-go">Explore</button> </Link>
       </div>
     </div>
     </>

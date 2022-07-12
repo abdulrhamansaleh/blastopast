@@ -1,11 +1,12 @@
 /* CSS */
 .btn-go {
-  margin-top:auto;
+  margin-inline:25%;
+  margin-top:20%;
   background-color: transparent;
   border: 2px solid #1A1A1A;
   border-radius: 15px;
   box-sizing: border-box;
-  color: #3B3B3B;
+  color: white;
   cursor: pointer;
   display: inline-block;
   font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
@@ -44,7 +45,6 @@
 .columnPara{
     color:white;
     margin-top:5%;
-    border:1px solid red;
     padding-inline: 10%;
 }
 .columnHeader{
@@ -85,7 +85,8 @@
     flex: 80%;
     min-height:50vh;
     margin-inline:5%;
-    background:#586A6A;
+    background:#3B3B3B;
+    /*background:#586A6A;*/
     box-shadow:0 15px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
 }
 .column-2{
